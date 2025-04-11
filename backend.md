@@ -1,7 +1,7 @@
 # 📦 PLAS Backend Documentation – Power Line Analytics Software
 
 ## Overview
-The PLAS (Power Line Analytics Software) backend provides a modular, scalable, and real-time platform for monitoring and analyzing power grid infrastructure. This document outlines the architecture, key modules, technologies, and API endpoints necessary for managing and simulating grid operations.
+The PLAS (Power Line Analytics Software) backend provides a modular, scalable, and real-time platform for monitoring and analyzing power grid infrastructure. This document outlines the architecture, key modules, technologies, API endpoints, and simulation capabilities.
 
 ---
 
@@ -80,15 +80,66 @@ The PLAS (Power Line Analytics Software) backend provides a modular, scalable, a
 
 ---
 
-## 🌐 API Summary
-Follows RESTful conventions:
-- `GET` for retrieval
-- `POST` for creation
-- `PUT` for updates
-- `DELETE` for removal
-- `WebSocket` endpoints for real-time monitoring
+## 🌐 API Endpoints Summary
 
-See separate [API Endpoints Document] for full route list.
+### 1. **Authentication & User Management**
+- `POST /auth/login` – Authenticate user and return JWT token
+- `POST /auth/logout` – Invalidate current session
+- `GET /auth/me` – Get current user info
+- `POST /auth/2fa/setup` – Enable two-factor authentication
+- `GET /users/roles` – Get roles and permissions
+
+### 2. **Asset Management**
+- `GET /assets` – List all assets
+- `POST /assets` – Create a new asset
+- `PUT /assets/{id}` – Update asset data
+- `DELETE /assets/{id}` – Remove asset
+- `GET /assets/{id}/maintenance` – Maintenance logs for asset
+
+### 3. **Network Data**
+- `GET /network/topology` – Get power grid structure
+- `GET /network/region/{id}` – Get region-specific network data
+
+### 4. **Fault Detection**
+- `POST /faults/report` – Report a new fault
+- `GET /faults/active` – Get active faults
+- `PUT /faults/{id}/resolve` – Mark fault as resolved
+- `GET /faults/history` – Fetch historical fault data
+
+### 5. **Analytics**
+- `GET /analytics/load` – Load analysis
+- `GET /analytics/transformer-health` – Transformer performance
+- `GET /analytics/phase-imbalance` – Phase imbalance detection
+- `GET /analytics/forecast` – Demand forecasting
+
+### 6. **Alerts & Notifications**
+- `GET /alerts` – Get real-time alerts
+- `POST /alerts/acknowledge` – Acknowledge alert
+- `PUT /alerts/preferences` – Update notification preferences
+
+### 7. **Settings**
+- `GET /settings/user` – Get user settings
+- `PUT /settings/system` – Update system-wide configuration
+
+### 8. **Reports & Exports**
+- `POST /reports/generate` – Generate report (custom)
+- `GET /reports/export` – Export data
+- `GET /reports/charts` – Export visuals as PNG/SVG
+
+### 9. **Monitoring**
+- `GET /monitor/system` – System status
+- `GET /monitor/asset/{id}` – Monitor specific asset
+- `GET /monitor/region` – Regional grid load overview
+
+### 10. **Field Technician Tools**
+- `POST /technicians/assign-task` – Assign task
+- `POST /technicians/report` – Submit field report
+- `GET /technicians/nearby-assets` – Get GPS-based asset list
+
+### 11. **Simulation Engine**
+- `POST /simulation/run` – Trigger power flow simulation
+- `GET /simulation/results/{id}` – Retrieve past results
+- `GET /simulation/status/{id}` – Get status of a running sim
 
 ---
 
@@ -119,10 +170,14 @@ See separate [API Endpoints Document] for full route list.
 ---
 
 ## 📚 Future Enhancements
-- Integration with SCADA/AMI
-- AI model for predictive fault analytics
-- Offline mode for mobile technician app
-- Blockchain-based fault attestation
+- Integration with SCADA/AMI systems
+- Predictive analytics using AI/ML for maintenance
+- Mobile offline mode for technicians
+- Multi-tenant support for utility companies
+- Blockchain for verifiable fault logging
+- Real-time video feed integration for substations
+- GIS-powered planning and routing for asset upgrades
+- Natural language search over logs and reports
 
 ---
 
